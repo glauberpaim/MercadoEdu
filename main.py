@@ -2,10 +2,12 @@ from Medu import MercadoEdu
 import pandas as pd
 
 if __name__ == "__main__":
-	adm = MercadoEdu('Administração').dados() 
-	cc = MercadoEdu('Ciências Contábeis').dados()
-	enf = MercadoEdu('Enfermagem').dados()
+	# Array para iterar no map.
+	it = ['Administração', 'Ciências Contábeis', 'Enfermagem' ]
+	
+	# Uma alternativa escalável
 
-	df = pd.concat([adm, cc, enf], axis = 0)
+	k = [*map(MercadoEdu, it)]
+	df = pd.concat([a.dados() for a in k])
 	df.to_csv('database.csv', index = False)
-	print("Arvquivo gerado!")
+	print("Arquivo gerado!")
